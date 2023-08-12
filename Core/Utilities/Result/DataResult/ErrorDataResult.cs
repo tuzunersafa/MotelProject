@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core.Utilities.Result.DataResult
 {
-    internal class ErrorDataResult<T> : DataResult<T>
+    public class ErrorDataResult<T> : DataResult<T>
     {
         public ErrorDataResult(T data) : base(data, false)
         {
