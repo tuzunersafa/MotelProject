@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Utilities.DataResult
+namespace Core.Utilities.Result.VoidResult
 {
-    internal class ErrorDataResult<T> : DataResult
+    public interface IResult
     {
+        string Message { get; }
+        bool IsSuccess { get; }
     }
 }

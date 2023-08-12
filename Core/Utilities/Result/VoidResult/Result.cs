@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Utilities.VoidResult
+namespace Core.Utilities.Result.VoidResult
 {
     public class Result : IResult
     {

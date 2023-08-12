@@ -4,11 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Utilities.VoidResult
+namespace DataAccess.Concrete.EntityFramework
 {
-    public interface IResult
+    internal class EfBookingDal
     {
-        string Message { get; }
-        bool IsSuccess { get; }
     }
 }

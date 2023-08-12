@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Utilities
+namespace DataAccess.Concrete.EntityFramework
 {
-    internal class ErrorResult
+    internal class EfRoomDal
     {
     }
 }
