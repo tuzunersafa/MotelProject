@@ -17,6 +17,8 @@ namespace Business.Constants
         public static string CheckedOut = "Odadan çıkış yapıldı";
         public static string InvalidName = "Hatalı isim girişi";
         public static string NotFound = "Bulunamadı";
+        public static string RoomInUse = "Oda kullanımda";
+
 
 
     }

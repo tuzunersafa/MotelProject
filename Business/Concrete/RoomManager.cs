@@ -45,23 +45,39 @@ namespace Business.Concrete
             var result = _roomDal.GetAll().Where(r=> r.NumberOfBigBeds == number).ToList();
             if (result.Count() > 0)
             {
-                return new SuccessDataResult<Room>(result);
+                return new ErrorDataResult<List<Room>>(result);
             }
+            return new ErrorDataResult<List<Room>>(Messages.NotFound);
         }
 
         public IDataResult<Room> GetById(int id)
         {
-            throw new NotImplementedException();
+            var result = _roomDal.Get(r=> r.Id == id);
+            if (result != null)
+            {
+                return new SuccessDataResult<Room>(result,Messages.Listed);
+            }
+            return new ErrorDataResult<Room>(Messages.NotFound);
         }
 
-        public IDataResult<Room> GetByShowerNumber(int number)
+        public IDataResult<List<Room>> GetByShowerNumber(int number)
         {
-            throw new NotImplementedException();
+            var result = _roomDal.GetAll().Where(r => r.NumberOfShower == number).ToList();
+            if (result.Count() > 0)
+            {
+                return new ErrorDataResult<List<Room>>(result);
+            }
+            return new ErrorDataResult<List<Room>>(Messages.NotFound);
         }
 
-        public IDataResult<Room> GetBySmallBedNumber(int number)
+        public IDataResult<List<Room>> GetBySmallBedNumber(int number)
         {
-            throw new NotImplementedException();
+            var result = _roomDal.GetAll().Where(r => r.NumberOfSmallBeds == number).ToList();
+            if (result.Count() > 0)
+            {
+                return new ErrorDataResult<List<Room>>(result);
+            }
+            return new ErrorDataResult<List<Room>>(Messages.NotFound);
         }
 
         

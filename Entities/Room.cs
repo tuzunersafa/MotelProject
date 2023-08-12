@@ -14,5 +14,6 @@ namespace Entities
         public int NumberOfSmallBeds { get; set; }
         public int NumberOfShower { get; set; }
 
+
     }
 }

@@ -10,8 +10,8 @@ namespace Entities
     public class Booking : IEntity
     {
         public int Id { get; set; }
-        public DateTime CheckIn { get; set; }
-        public DateTime CheckOut { get; set; }
+        public DateTime CheckInDate { get; set; }
+        public DateTime CheckOutDate { get; set; }
         public int CustomerId { get; set; }
         public int RoomId { get; set; }
 
