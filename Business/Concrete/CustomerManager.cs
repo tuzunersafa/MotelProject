@@ -74,7 +74,7 @@ namespace Business.Concrete
 
         public IDataResult<List<Customer>> GetByName(string name)
         {
-            var result = _customerDal.GetAll().Where(c => c.FirstName == name).ToList();
+            var result = _customerDal.GetAll(c => c.FirstName == name);//.Where(c => c.FirstName == name).ToList();
             if (result != null)
             {
                 return new SuccessDataResult<List<Customer>>(result);

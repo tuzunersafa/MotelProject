@@ -19,10 +19,6 @@ namespace Core.Utilities.Result.DataResult
             Data = data;
         }
 
-        public string Message { get; }
-
-        public bool IsSuccess { get; }
-
         public T Data { get; }
     }
 }
