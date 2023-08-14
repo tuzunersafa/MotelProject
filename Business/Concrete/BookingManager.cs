@@ -90,5 +90,16 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<BookingDetailDto>(_bookingDal.GetBookingDetail(filter));
         }
+
+        //public virtual IDataResult<List<Booking>> GetByCheckInDate(DateTime minDate, DateTime maxDate)
+        //{
+        //    var result = _bookingDal.GetAll(b => b.CheckInDate > minDate && b.CheckInDate < maxDate).ToList();
+        //    if (result != null)
+        //    {
+        //        return new SuccessDataResult<List<Booking>>(result, Messages.Listed);
+        //    }
+        //    else return new ErrorDataResult<List<Booking>>();
+        //}
+
     }
 }

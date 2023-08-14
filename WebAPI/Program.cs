@@ -16,6 +16,10 @@ namespace WebAPI
             builder.Services.AddControllers();
             builder.Services.AddSingleton<ICustomerService,CustomerManager>();
             builder.Services.AddSingleton<ICustomerDal,EfCustomerDal>();
+
+            builder.Services.AddSingleton<IBookingService, BookingManager>();
+            builder.Services.AddSingleton<IBookingDal, EfBookingDal>();
+
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();

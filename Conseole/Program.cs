@@ -14,7 +14,7 @@ namespace Conseole
             //bookingManager.Add(new Entities.Booking { CustomerId= 1, RoomId= 1 ,CheckInDate = new DateTime(2023,12,31)});
 
             
-            Console.WriteLine(bookingManager.CheckOut(1, new DateTime(2023, 12, 31)).Message);
+            //Console.WriteLine(bookingManager.CheckOut(1, new DateTime(2023, 12, 31)).Message);
 
 
             //var fonk = customerManager.Update(new Entities.Customer
@@ -38,7 +38,14 @@ namespace Conseole
             //}
 
 
+            var bookingDal = new EfBookingDal();
 
+            var results = bookingDal.GetAll(b=> b.CheckInDate < DateTime.Today && b.CheckInDate> DateTime.Now.AddYears(-5));
+
+            foreach (var item in results)
+            {
+                Console.WriteLine(item.Id);
+            }
 
         }
     }
