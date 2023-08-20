@@ -21,7 +21,7 @@ namespace Business.Concrete
             _customerDal = customerDal;
         }
 
-        public IResult Add(Customer customer)
+        public Core.Utilities.Result.VoidResult.IResult Add(Customer customer)
         {
             if (customer.FirstName.Length < 2)
             {
@@ -34,7 +34,7 @@ namespace Business.Concrete
             }
         }
 
-        public IResult Delete(Customer customer)
+        public Core.Utilities.Result.VoidResult.IResult Delete(Customer customer)
         {
             _customerDal.Delete(customer);
             return new SuccessResult(Messages.Deleted);
@@ -82,7 +82,7 @@ namespace Business.Concrete
             return new ErrorDataResult<List<Customer>>(Messages.Listed);
         }
 
-        public IResult Update(Customer customer)
+        public Core.Utilities.Result.VoidResult.IResult Update(Customer customer)
         {
             _customerDal.Update(customer);
             return new SuccessResult(Messages.Updated);

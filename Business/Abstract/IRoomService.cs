@@ -12,11 +12,14 @@ namespace Business.Abstract
     public interface IRoomService
     {
         IResult Add(Room room);
+        
         IResult Update(Room room);
         IResult Delete(Room room);
         IDataResult<Room> GetById(int id);
+        IDataResult<List<Room>> GetAll();
         IDataResult<List<Room>> GetBySmallBedNumber(int number);
         IDataResult<List<Room>> GetByShowerNumber(int number);
         IDataResult<List<Room>> GetByBigBedNumber(int number);
+        
     }
 }

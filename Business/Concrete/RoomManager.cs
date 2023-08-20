@@ -26,7 +26,7 @@ namespace Business.Concrete
         public IResult Add(Room room)
         {
             _roomDal.Add(room);
-            return new SuccessResult(Messages.Added);
+            return new SuccessResult();
         }
 
         public IResult Delete(Room room)
@@ -40,12 +40,28 @@ namespace Business.Concrete
             return new SuccessResult(Messages.Updated);
         }
 
+
+
+        IDataResult<List<Room>> IRoomService.GetAll()
+        {
+            var result = _roomDal.GetAll();
+            return new SuccessDataResult<List<Room>>(result);
+        }
+
+        
+
+
+
+
+
+
+
         public IDataResult<List<Room>> GetByBigBedNumber(int number)
         {
             var result = _roomDal.GetAll().Where(r=> r.NumberOfBigBeds == number).ToList();
             if (result.Count() > 0)
             {
-                return new ErrorDataResult<List<Room>>(result);
+                return new SuccessDataResult<List<Room>>(result);
             }
             return new ErrorDataResult<List<Room>>(Messages.NotFound);
         }
@@ -65,7 +81,7 @@ namespace Business.Concrete
             var result = _roomDal.GetAll().Where(r => r.NumberOfShower == number).ToList();
             if (result.Count() > 0)
             {
-                return new ErrorDataResult<List<Room>>(result);
+                return new SuccessDataResult<List<Room>>(result);
             }
             return new ErrorDataResult<List<Room>>(Messages.NotFound);
         }
@@ -75,7 +91,7 @@ namespace Business.Concrete
             var result = _roomDal.GetAll().Where(r => r.NumberOfSmallBeds == number).ToList();
             if (result.Count() > 0)
             {
-                return new ErrorDataResult<List<Room>>(result);
+                return new SuccessDataResult<List<Room>>(result);
             }
             return new ErrorDataResult<List<Room>>(Messages.NotFound);
         }

@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.CrossCuttingConcerns.FluentValidation;
 using Core.Utilities.Result.DataResult;
 using Core.Utilities.Result.VoidResult;
 using DataAccess.Abstract;
@@ -32,18 +34,23 @@ namespace Business.Concrete
         }
         public IResult Delete(Booking booking)
         {
+
             _bookingDal.Delete(booking);
             return new SuccessResult(Messages.Deleted);
         }
 
         public IResult Add(Booking booking)
         {
+            ValidationTool.Validate(new BookingValidator(), booking);
+
             _bookingDal.Add(booking);
             return new SuccessResult(Messages.Added);
         }
 
         public IResult CheckIn(Booking booking)
         {
+
+
             var result = _bookingDal.Get(b => b.Id == booking.Id && b.CheckOutDate == default);
             if (result == null)
             {
