@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingConcerns.FluentValidation;
 using Core.Utilities.Result.DataResult;
 using Core.Utilities.Result.VoidResult;
@@ -39,9 +40,11 @@ namespace Business.Concrete
             return new SuccessResult(Messages.Deleted);
         }
 
+
+        [ValidationAspect(typeof(BookingValidator))]
         public IResult Add(Booking booking)
         {
-            ValidationTool.Validate(new BookingValidator(), booking);
+            //ValidationTool.Validate(new BookingValidator(), booking);
 
             _bookingDal.Add(booking);
             return new SuccessResult(Messages.Added);

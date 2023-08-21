@@ -12,7 +12,7 @@ namespace Business.ValidationRules.FluentValidation
     {
         public BookingValidator()
         {
-            RuleFor(b=> b.CheckInDate).NotEmpty();
+            RuleFor(b=> b.CheckInDate).NotEmpty().WithMessage("CheckIn yapılan gün boş olamaz");
             RuleFor(b=> b.CustomerId).NotEmpty();
 
         }
