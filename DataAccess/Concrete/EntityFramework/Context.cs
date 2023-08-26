@@ -18,6 +18,7 @@ namespace DataAccess.Concrete.EntityFramework
         public DbSet<Booking> Bookings { get; set; }
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<RoomImage> RoomImages { get; set; }
 
     }
 }

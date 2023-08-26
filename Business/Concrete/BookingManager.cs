@@ -54,7 +54,11 @@ namespace Business.Concrete
         public IResult CheckIn(Booking booking)
         {
 
-            var errorResults = BusinessRuleChecker.Check(CheckIfRoomIsEmpty(booking.RoomId));
+            var errorResults = BusinessRuleChecker.Check
+                (
+                CheckIfRoomIsEmpty(booking.RoomId),
+                CheckIfCheckOutDateEntered(booking)
+                );
 
             if (errorResults.IsSuccess)
             {
@@ -67,11 +71,14 @@ namespace Business.Concrete
 
         public IResult CheckOut(int bookingId, DateTime checkOutDate)
         {
-            var errorResults = BusinessRuleChecker.Check(CheckIfRoomInUse(bookingId));
+            var errorResults = BusinessRuleChecker.Check
+                (
+                CheckIfRoomInUse(bookingId)
+                );
 
             if (errorResults.IsSuccess)
             {
-                var booking = _bookingDal.Get(b=> b.Id == bookingId);
+                var booking = _bookingDal.Get(b => b.Id == bookingId);
                 booking.CheckOutDate = checkOutDate;
                 _bookingDal.Update(booking);
                 return new SuccessResult(Messages.CheckedOut);
@@ -80,10 +87,10 @@ namespace Business.Concrete
             return new ErrorResult(errorResults.Message);
 
 
-            
-            
 
-            
+
+
+
 
         }
 
@@ -121,11 +128,19 @@ namespace Business.Concrete
 
 
         //RULES
+        private IResult CheckIfCheckOutDateEntered(Booking booking)
+        {
+            if (booking.CheckOutDate != default)
+            {
+                return new ErrorResult(Messages.CheckOutMustBeEmptyWhileCheckingIn);
+            }
+            return new SuccessResult();
+        }
 
         private IResult CheckIfRoomIsEmpty(int roomId)
         {
-            var result = _bookingDal.GetBookingDetail(b=> b.RoomId == roomId);
-            if (result!= null)
+            var result = _bookingDal.GetBookingDetail(b => b.RoomId == roomId);
+            if (result != null)
             {
                 return new ErrorResult(Messages.RoomInUse);
             }

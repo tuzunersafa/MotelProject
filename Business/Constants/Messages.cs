@@ -18,8 +18,8 @@ namespace Business.Constants
         public static string InvalidName = "Hatalı isim girişi";
         public static string NotFound = "Bulunamadı";
         public static string RoomInUse = "Oda kullanımda";
-
-
+        public static string CheckOutMustBeEmptyWhileCheckingIn = "Giriş kaydı sırasında çıkış günü boş olmalıdır";
+        public static string InvalidExtension = "Hatalı uzantı";
 
     }
 }
