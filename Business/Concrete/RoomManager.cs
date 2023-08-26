@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Result.DataResult;
 using Core.Utilities.Result.VoidResult;
 using DataAccess.Abstract;
@@ -22,7 +24,7 @@ namespace Business.Concrete
 
 
 
-
+        [ValidationAspect(typeof(RoomValidator))]
         public IResult Add(Room room)
         {
             _roomDal.Add(room);

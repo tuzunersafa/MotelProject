@@ -3,6 +3,7 @@ using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingConcerns.FluentValidation;
+using Core.Utilities.BusinessRules;
 using Core.Utilities.Result.DataResult;
 using Core.Utilities.Result.VoidResult;
 using DataAccess.Abstract;
@@ -53,31 +54,36 @@ namespace Business.Concrete
         public IResult CheckIn(Booking booking)
         {
 
+            var errorResults = BusinessRuleChecker.Check(CheckIfRoomIsEmpty(booking.RoomId));
 
-            var result = _bookingDal.Get(b => b.Id == booking.Id && b.CheckOutDate == default);
-            if (result == null)
+            if (errorResults.IsSuccess)
             {
                 _bookingDal.Add(booking);
                 return new SuccessResult(Messages.CheckedIn);
             }
-            else
-            {
-                return new ErrorResult(Messages.RoomInUse);
-            }
+
+            return new ErrorResult(Messages.RoomInUse);
         }
 
         public IResult CheckOut(int bookingId, DateTime checkOutDate)
         {
-            var booking = _bookingDal.Get(b => b.Id == bookingId && b.CheckOutDate == default);
-            if (booking != null)
+            var errorResults = BusinessRuleChecker.Check(CheckIfRoomInUse(bookingId));
+
+            if (errorResults.IsSuccess)
             {
+                var booking = _bookingDal.Get(b=> b.Id == bookingId);
                 booking.CheckOutDate = checkOutDate;
                 _bookingDal.Update(booking);
                 return new SuccessResult(Messages.CheckedOut);
 
             }
-            return new ErrorResult(Messages.NotFound);
+            return new ErrorResult(errorResults.Message);
 
+
+            
+            
+
+            
 
         }
 
@@ -111,5 +117,29 @@ namespace Business.Concrete
         //    else return new ErrorDataResult<List<Booking>>();
         //}
 
+
+
+
+        //RULES
+
+        private IResult CheckIfRoomIsEmpty(int roomId)
+        {
+            var result = _bookingDal.GetBookingDetail(b=> b.RoomId == roomId);
+            if (result!= null)
+            {
+                return new ErrorResult(Messages.RoomInUse);
+            }
+            return new SuccessResult();
+        }
+
+        private IResult CheckIfRoomInUse(int bookingId)
+        {
+            var result = _bookingDal.GetBookingDetail(b => b.Id == bookingId);
+            if (result == null)
+            {
+                return new ErrorResult(Messages.NotFound);
+            }
+            return new SuccessResult();
+        }
     }
 }

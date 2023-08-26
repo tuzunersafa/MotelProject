@@ -18,7 +18,13 @@ namespace DataAccess.Concrete.EntityFramework
         {
             using (MotelContext context = new MotelContext())
             {
-                var result = from b in context.Bookings join c in context.Customers on b.CustomerId equals c.Id select new BookingDetailDto { CheckInDate = b.CheckInDate, CheckOutDate = b.CheckOutDate, Id = b.Id, CustomerId = c.Id, CustomerFirstName = c.FirstName };
+                var result = from b in context.Bookings join c in context.Customers on b.CustomerId equals c.Id select new BookingDetailDto 
+                {
+                    CheckInDate = b.CheckInDate,
+                    RoomId = b.RoomId,
+                    CheckOutDate = b.CheckOutDate,
+                    Id = b.Id, CustomerId = c.Id, 
+                    CustomerFirstName = c.FirstName };
                 return result.SingleOrDefault(filter);
             }
             
